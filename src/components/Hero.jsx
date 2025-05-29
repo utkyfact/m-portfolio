@@ -1,8 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Music, Play, Volume2, Headphones } from 'lucide-react'
-import FallingText from './FallingText';
-import DecryptedText from './DecryptedText';
 
 const Hero = () => {
   const ref = useRef(null)
@@ -28,12 +26,12 @@ const Hero = () => {
           {[...Array(20)].map((_, i) => (
             <motion.div
               key={i}
-              initial={{
+              initial={{ 
                 x: typeof window !== 'undefined' ? Math.random() * (window.innerWidth - 50) : Math.random() * 1150,
                 y: typeof window !== 'undefined' ? Math.random() * (window.innerHeight - 50) : Math.random() * 750,
                 opacity: 0
               }}
-              animate={{
+              animate={{ 
                 y: [null, -100, -200],
                 opacity: [1, 1, 1]
               }}
@@ -59,73 +57,57 @@ const Hero = () => {
         style={{ opacity }}
         className="relative z-10 flex items-center justify-center h-full"
       >
-        <div className="text-center text-white max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-20">
-          {/* Main Heading - Fallback + FallingText */}
-          <div className="h-24 sm:h-32 lg:h-40 mb-4 sm:mb-6 lg:mb-8 relative flex items-center justify-center">
-            {/* Fallback başlık - FallingText çalışmazsa görünür */}
-            <motion.h1
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.2 }}
-              className="absolute inset-0 flex items-center justify-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight"
-            >
-              <span className="gradient-text sm:hidden block">Müziğin Büyülü Dünyası</span>
-            </motion.h1>
-            
-            {/* FallingText overlay */}
-            <div className="absolute inset-0 z-10 h-100">
-              <FallingText
-                text="Müziğin Büyülü Dünyası"
-                highlightWords={["Müziğin", "Büyülü", "Dünyası"]}
-                trigger="hover"
-                backgroundColor="transparent"
-                wireframes={false}
-                gravity={0.8}
-                fontSize="clamp(1.5rem, 4vw, 3.5rem)"
-                mouseConstraintStiffness={0.1}
-              />
-            </div>
-          </div>
+        <div className="text-center text-white max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Main heading */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="mb-6"
+          >
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 leading-tight">
+              <span className="block">Müziğin</span>
+              <span className="block gradient-text">Büyülü Dünyası</span>
+            </h1>
+          </motion.div>
 
-          {/* DecryptedText - Responsive */}
-          <div className="mb-6 sm:mb-8 lg:mb-10">
-            <DecryptedText
-              text="Profesyonel müzik ve şan eğitimi ile hayallerinizi gerçeğe dönüştürün!"
-              animateOn="view"
-              revealDirection="center"
-              sequential={true}
-              speed={50}
-              maxIterations={8}
-              useOriginalCharsOnly={true}
-              className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-200 font-light tracking-wide leading-relaxed"
-              parentClassName="inline-block"
-            />
-          </div>
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 text-gray-200 px-4 sm:px-0"
+          >
+            Profesyonel müzik ve şan eğitimi ile hayallerinizi gerçeğe dönüştürün
+          </motion.p>
 
           {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.8 }}
-            className="flex gap-3 sm:gap-4 justify-center items-center mt-6 sm:mt-8 lg:mt-10 px-4 sm:px-0"
+            className="flex gap-4 justify-center items-center"
           >
             <motion.button
               whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(255,255,255,0.3)" }}
               whileTap={{ scale: 0.95 }}
-              className="btn-primary flex items-center justify-center gap-2 text-sm sm:text-base px-4 sm:px-6 py-2 sm:py-3 w-full sm:w-auto whitespace-nowrap"
+              className="btn-primary flex items-center space-x-2 text-sm sm:text-base lg:text-lg px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto gap-2"
               onClick={() => document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' })}
             >
-              <Play size={16} className="sm:w-4 sm:h-4" />
-              <span>Hemen Başla</span>
+              <Play size={18} className="sm:w-5 sm:h-5" />
+              <span cl>Hemen Başla</span>
             </motion.button>
 
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="border-2 border-white text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:bg-white hover:text-purple-900 transition-all duration-300 flex items-center justify-center gap-2 w-full sm:w-auto text-sm sm:text-base cursor-pointer whitespace-nowrap"
+              className="border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-white hover:text-purple-900 transition-all duration-300 flex items-center space-x-2 w-full sm:w-auto text-sm sm:text-base cursor-pointer"
               onClick={() => document.querySelector('#about').scrollIntoView({ behavior: 'smooth' })}
+              style={{
+                padding: '6px',
+              }}
             >
-              <Volume2 size={16} className="sm:w-4 sm:h-4" />
+              <Volume2 size={18} className="sm:w-5 sm:h-5" />
               <span>Daha Fazla Bilgi</span>
             </motion.button>
           </motion.div>
@@ -133,11 +115,11 @@ const Hero = () => {
           {/* Floating music icons */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
             <motion.div
-              animate={{
+              animate={{ 
                 y: [0, -20, 0],
                 rotate: [0, 5, -5, 0]
               }}
-              transition={{
+              transition={{ 
                 duration: 4,
                 repeat: Infinity,
                 ease: "easeInOut"
@@ -148,11 +130,11 @@ const Hero = () => {
             </motion.div>
 
             <motion.div
-              animate={{
+              animate={{ 
                 y: [0, -15, 0],
                 rotate: [0, -5, 5, 0]
               }}
-              transition={{
+              transition={{ 
                 duration: 3,
                 repeat: Infinity,
                 ease: "easeInOut",
@@ -164,11 +146,11 @@ const Hero = () => {
             </motion.div>
 
             <motion.div
-              animate={{
+              animate={{ 
                 y: [0, -25, 0],
                 rotate: [0, 10, -10, 0]
               }}
-              transition={{
+              transition={{ 
                 duration: 5,
                 repeat: Infinity,
                 ease: "easeInOut",

@@ -7,6 +7,8 @@ import Gallery from './components/Gallery'
 import Testimonials from './components/Testimonials'
 import Contact from './components/Contact'
 import Navigation from './components/Navigation'
+import ScrollToTop from './components/ScrollToTop'
+import WhatsAppButton from './components/WhatsAppButton'
 import './App.css'
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
       <Gallery />
       <Testimonials />
       <Contact />
+      <ScrollToTop />
+      <WhatsAppButton />
     </div>
   )
 }

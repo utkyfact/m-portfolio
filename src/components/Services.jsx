@@ -1,10 +1,11 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Music, Mic, Users, BookOpen, Star, Clock } from 'lucide-react'
 
 const Services = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, threshold: 0.2 })
+  const [activeMobileCard, setActiveMobileCard] = useState(null)
 
   const services = [
     {
@@ -107,22 +108,38 @@ const Services = () => {
                 y: -10,
                 transition: { duration: 0.3 }
               }}
-              className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
+              whileTap={{ scale: 0.95 }}
+              className={`group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer ${
+                activeMobileCard === index ? 'shadow-2xl -translate-y-2' : ''
+              }`}
+              onClick={() => {
+                // Mobile cihazlarda kartı aktif/inaktif yap
+                setActiveMobileCard(activeMobileCard === index ? null : index)
+              }}
+              onMouseEnter={() => {
+                // Desktop'ta mouse enter olduğunda mobile state'i temizle
+                setActiveMobileCard(null)
+              }}
             >
               {/* Background gradient */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
+              <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300 ${
+                activeMobileCard === index ? 'opacity-10' : ''
+              }`} />
               
               <div className="relative p-4 sm:p-6 lg:p-8">
                 {/* Icon */}
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
+                  whileTap={{ scale: 1.1, rotate: 5 }}
                   className={`w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br ${service.color} rounded-2xl flex items-center justify-center mb-4 sm:mb-6 shadow-lg`}
                 >
                   <service.icon className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white" />
                 </motion.div>
 
                 {/* Content */}
-                <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-800 mb-2 sm:mb-3 group-hover:text-purple-600 transition-colors duration-300">
+                <h3 className={`text-lg sm:text-xl lg:text-2xl font-bold text-gray-800 mb-2 sm:mb-3 group-hover:text-purple-600 transition-colors duration-300 ${
+                  activeMobileCard === index ? 'text-purple-600' : ''
+                }`}>
                   {service.title}
                 </h3>
                 
@@ -158,7 +175,9 @@ const Services = () => {
               </div>
 
               {/* Decorative elements */}
-              <div className="absolute top-4 right-4 opacity-10 group-hover:opacity-20 transition-opacity duration-300">
+              <div className={`absolute top-4 right-4 opacity-10 group-hover:opacity-20 transition-opacity duration-300 ${
+                activeMobileCard === index ? 'opacity-20' : ''
+              }`}>
                 <div className="text-4xl">♪</div>
               </div>
             </motion.div>
