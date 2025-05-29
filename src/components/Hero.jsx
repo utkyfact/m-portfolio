@@ -86,29 +86,26 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.8 }}
-            className="flex gap-4 justify-center items-center"
+            className="flex gap-3 sm:gap-4 justify-center items-center px-4 sm:px-0"
           >
             <motion.button
               whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(255,255,255,0.3)" }}
               whileTap={{ scale: 0.95 }}
-              className="btn-primary flex items-center space-x-2 text-sm sm:text-base lg:text-lg px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto gap-2"
+              className="btn-primary flex items-center justify-center gap-2 text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-3 w-full sm:w-auto min-w-[140px] sm:min-w-[160px] whitespace-nowrap"
               onClick={() => document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' })}
             >
-              <Play size={18} className="sm:w-5 sm:h-5" />
-              <span cl>Hemen Başla</span>
+              <Play size={16} className="sm:w-4 sm:h-4 flex-shrink-0" />
+              <span className="flex-shrink-0">Hemen Başla</span>
             </motion.button>
 
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-white hover:text-purple-900 transition-all duration-300 flex items-center space-x-2 w-full sm:w-auto text-sm sm:text-base cursor-pointer"
+              className="border-2 border-white text-white px-4 sm:px-6 py-3 sm:py-3 rounded-full font-semibold hover:bg-white hover:text-purple-900 transition-all duration-300 flex items-center justify-center gap-2 w-full sm:w-auto min-w-[160px] sm:min-w-[180px] text-sm sm:text-base cursor-pointer whitespace-nowrap"
               onClick={() => document.querySelector('#about').scrollIntoView({ behavior: 'smooth' })}
-              style={{
-                padding: '6px',
-              }}
             >
-              <Volume2 size={18} className="sm:w-5 sm:h-5" />
-              <span>Daha Fazla Bilgi</span>
+              <Volume2 size={16} className="sm:w-4 sm:h-4 flex-shrink-0" />
+              <span className="flex-shrink-0">Daha Fazla Bilgi</span>
             </motion.button>
           </motion.div>
 
