@@ -1,10 +1,12 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Music, Play, Volume2, Headphones } from 'lucide-react'
 import { BsHandIndexThumb } from "react-icons/bs";
 
 const Hero = () => {
   const ref = useRef(null)
+  const [showScrollIndicator, setShowScrollIndicator] = useState(true)
+  
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"]
@@ -14,6 +16,22 @@ const Hero = () => {
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0])
 
   const musicNotes = ['♪', '♫', '♬', '♩', '♭', '♯']
+
+  // Scroll indicator visibility kontrolü
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY
+      // 100px scroll sonrası gizle, 50px'in altında tekrar göster
+      if (scrollY > 100) {
+        setShowScrollIndicator(false)
+      } else if (scrollY < 50) {
+        setShowScrollIndicator(true)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
     <section id="hero" ref={ref} className="relative h-screen overflow-hidden">
@@ -165,8 +183,14 @@ const Hero = () => {
       {/* Scroll indicator - Responsive */}
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
+        animate={{ 
+          opacity: showScrollIndicator ? 1 : 0,
+          y: showScrollIndicator ? 0 : 20
+        }}
+        transition={{ 
+          duration: 0.3,
+          delay: showScrollIndicator ? 1 : 0
+        }}
         className="absolute bottom-15 left-1/2 transform -translate-x-1/2"
       >
         {/* Desktop - Mouse scroll indicator */}
