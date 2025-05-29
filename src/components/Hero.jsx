@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Music, Play, Volume2, Headphones } from 'lucide-react'
+import { BsHandIndexThumb } from "react-icons/bs";
 
 const Hero = () => {
   const ref = useRef(null)
@@ -161,23 +162,63 @@ const Hero = () => {
         </div>
       </motion.div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator - Responsive */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2 }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
       >
+        {/* Desktop - Mouse scroll indicator */}
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-white rounded-full flex justify-center"
+          className="hidden sm:flex w-6 h-10 border-2 border-white rounded-full justify-center"
         >
           <motion.div
             animate={{ y: [0, 12, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
             className="w-1 h-3 bg-white rounded-full mt-2"
           />
+        </motion.div>
+
+        {/* Mobile - Swipe up indicator */}
+        <motion.div
+          animate={{ y: [0, -8, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+          className="flex sm:hidden flex-col items-center text-white"
+        >
+          {/* Parmak işareti */}
+          <motion.div
+            animate={{ 
+              y: [0, -5, 0],
+              scale: [1, 0.9, 1]
+            }}
+            transition={{ 
+              duration: 1.5, 
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="text-2xl mb-1"
+          >
+            <BsHandIndexThumb />
+          </motion.div>
+          
+          {/* Yukarı ok */}
+          <motion.div
+            animate={{ 
+              y: [0, -3, 0],
+              opacity: [0.5, 1, 0.5]
+            }}
+            transition={{ 
+              duration: 1.5, 
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="text-sm font-light"
+          >
+            Kaydır
+          </motion.div>
         </motion.div>
       </motion.div>
     </section>
